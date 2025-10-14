@@ -2,7 +2,7 @@
 
 A simple blogging app built with **Node.js**, **Express**, **EJS**, and **PostgreSQL**.
 
-🔗 **Live Demo**: [Check Project Here](https://blogspace-9ykx.onrender.com/blogs)
+🔗 **Live Demo**: [Check Project Here](https://blog-app-theta-dun.vercel.app/blogs)
 
 ---
 
