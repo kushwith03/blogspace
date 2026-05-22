@@ -30,7 +30,8 @@ A clean, secure, and interview-ready full-stack blog application. Built with a d
 - Run the queries in `schema.sql` to create the tables.
 
 ### 2. Backend
-- Create a `.env` file in the root based on `.env.example`.
+- Create a `.env` file in the root: `cp .env.example .env`
+- Update the variables in `.env` with your local database credentials.
 - Install dependencies: `npm install`
 - Start the server: `node api/index.js`
 
