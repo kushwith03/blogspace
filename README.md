@@ -1,6 +1,11 @@
 # BlogSpace
 
+[![Frontend Status](https://img.shields.io/badge/Frontend-Vercel-black?logo=vercel)](#) [![Backend Status](https://img.shields.io/badge/Backend-Render-46E3B7?logo=render)](#)
+
 A clean, secure, and interview-ready full-stack blog application. Built with a decoupled **MVC architecture** and **JWT authentication**.
+
+**Live Demo:** [https://blogspace-phi-two.vercel.app](https://blogspace-phi-two.vercel.app)
+**API Endpoint:** [https://blogspace-api-dy5p.onrender.com/api/health](https://blogspace-api-dy5p.onrender.com/api/health)
 
 ## 🚀 Tech Stack
 
