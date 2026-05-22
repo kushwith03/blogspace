@@ -15,6 +15,14 @@ A clean, secure, and interview-ready full-stack blog application. Built with a d
 - `/public` - Static frontend files
 - `schema.sql` - Database schema
 
+## 🌟 Key Technical Features
+
+- **Decoupled Architecture:** Separate frontend and backend for better scalability and independent deployment.
+- **Security:** Password hashing using `bcryptjs` to ensure user data protection.
+- **RESTful API:** Clean API design following REST conventions.
+- **Modern UI:** Responsive design using Bootstrap 5 and custom CSS.
+- **Production Ready:** Configured for easy deployment on Vercel, Render, and Neon.
+
 ## ⚙️ Local Setup
 
 ### 1. Database
