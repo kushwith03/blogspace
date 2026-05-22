@@ -51,7 +51,7 @@ export const updateBlog = async (req, res) => {
     if (!hashedPassword) return res.status(404).json({ error: "Blog not found" });
 
     const isMatch = await bcrypt.compare(formPassword, hashedPassword);
-    if (!isMatch) return res.status(401).json({ error: "Incorrect password" });
+    if (!isMatch) return res.status(400).json({ error: "Incorrect post password" });
 
     await Blog.update(id, newContent);
     res.json({ message: "Updated successfully" });
@@ -74,7 +74,7 @@ export const deleteBlog = async (req, res) => {
     if (!hashedPassword) return res.status(404).json({ error: "Blog not found" });
 
     const isMatch = await bcrypt.compare(formPassword, hashedPassword);
-    if (!isMatch) return res.status(401).json({ error: "Incorrect password" });
+    if (!isMatch) return res.status(400).json({ error: "Incorrect post password" });
 
     await Blog.delete(id);
     res.json({ message: "Deleted successfully" });
