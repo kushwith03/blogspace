@@ -1,3 +1,6 @@
+-- Enable UUID support
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
 CREATE TABLE blogs (
     id UUID PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
