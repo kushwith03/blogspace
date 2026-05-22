@@ -1,7 +1,7 @@
 body {
-    background-color: #1a1d21; /* Professional charcoal background */
+    background-color: #1f2123; /* Warmer charcoal background */
     font-family: 'Segoe UI', Roboto, "Helvetica Neue", Arial, sans-serif;
-    color: #e9ecef; /* High-contrast light gray text */
+    color: #f0f2f5; /* Warm off-white for best readability */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -9,36 +9,36 @@ body {
 
 .main-content {
     flex: 1 0 auto;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
 }
 
 .card {
-    background-color: #24292e; /* Slate gray card background */
-    border: 1px solid #343a40; /* Visible but subtle border */
-    border-radius: 0.75rem;
+    background-color: #2a2d30; /* Slightly warmer elevated card background */
+    border: 1px solid #3d4146; /* Better defined border */
+    border-radius: 0.8rem;
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
     transform: translateY(-4px);
-    border-color: #495057;
-    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5) !important;
+    border-color: #5a6169;
+    box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.6) !important;
 }
 
 .card-title {
-    color: #3793ff; /* Clear blue for titles */
+    color: #4da3ff; /* Brighter blue for better contrast against gray */
     font-weight: 600;
 }
 
 .text-muted, .text-secondary {
-    color: #adb5bd !important; /* Lighter secondary text for readability */
+    color: #b0b8c0 !important; /* Increased contrast for secondary text */
 }
 
 .navbar {
-    background-color: #141619 !important; /* Deepest gray for navbar */
-    border-bottom: 1px solid #2b3035;
-    padding: 0.75rem 0;
+    background-color: #181a1c !important; /* Warmest deep gray for navbar */
+    border-bottom: 1px solid #2e3236;
+    padding: 0.8rem 0;
 }
 
 .navbar-brand {
@@ -48,7 +48,7 @@ body {
 }
 
 .nav-link {
-    color: #adb5bd !important;
+    color: #b0b8c0 !important;
     font-weight: 500;
 }
 
@@ -61,94 +61,96 @@ body {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    height: 4.5em;
+    height: 4.8em;
     line-height: 1.6;
-    color: #ced4da;
+    color: #d1d9e0;
 }
 
 /* Forms & Inputs */
 .form-control {
-    background-color: #2b3035;
-    border: 1px solid #495057;
+    background-color: #2e3236; /* Distinct from page and card backgrounds */
+    border: 1px solid #545b62; /* High-visibility border */
     color: #f8f9fa;
-    padding: 0.6rem 0.75rem;
+    padding: 0.7rem 0.8rem;
 }
 
 .form-control::placeholder {
-    color: #868e96; /* Visible placeholders */
+    color: #a0a8b0; /* High-contrast placeholders for readability */
     opacity: 1;
 }
 
 .form-control:focus {
-    background-color: #2b3035;
-    border-color: #3793ff;
+    background-color: #2e3236;
+    border-color: #4da3ff;
     color: #ffffff;
-    box-shadow: 0 0 0 0.25rem rgba(55, 147, 255, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(77, 163, 255, 0.3);
 }
 
 .form-label {
-    color: #ced4da;
+    color: #e0e6ed;
     font-weight: 500;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
 }
 
 /* Buttons */
 .btn-primary {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background-color: #007bff;
+    border-color: #007bff;
     font-weight: 500;
 }
 
 .btn-primary:hover {
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
+    background-color: #0069d9;
+    border-color: #0062cc;
 }
 
 .btn-success {
-    background-color: #198754;
-    border-color: #198754;
+    background-color: #28a745;
+    border-color: #28a745;
 }
 
 .btn-outline-primary {
-    color: #3793ff;
-    border-color: #3793ff;
+    color: #4da3ff;
+    border-color: #4da3ff;
+    border-width: 1.5px;
 }
 
 .btn-outline-primary:hover {
-    background-color: #3793ff;
+    background-color: #4da3ff;
     color: #ffffff;
 }
 
 .btn-outline-secondary {
-    color: #ced4da;
-    border-color: #495057;
+    color: #d1d9e0;
+    border-color: #545b62;
 }
 
 .btn-outline-secondary:hover {
-    background-color: #495057;
+    background-color: #545b62;
     color: #ffffff;
 }
 
 footer {
     flex-shrink: 0;
-    background-color: #141619;
-    border-top: 1px solid #2b3035 !important;
+    background-color: #181a1c;
+    border-top: 1px solid #2e3236 !important;
+    padding: 2.5rem 0;
 }
 
 hr {
-    border-color: #495057;
-    opacity: 0.5;
+    border-color: #545b62;
+    opacity: 0.4;
 }
 
 /* Alerts */
 .alert-danger {
-    background-color: #3e2023;
-    border-color: #842029;
-    color: #f8d7da;
+    background-color: #442726;
+    border-color: #9a3434;
+    color: #ffcccc;
 }
 
 .alert-success {
-    background-color: #1a2e24;
-    border-color: #0f5132;
-    color: #d1e7dd;
+    background-color: #1b3321;
+    border-color: #2d663b;
+    color: #d4edda;
 }
