@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     res.json(result.rows);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: "Failed to fetch blogs from database" });
   }
 });
 
@@ -42,7 +42,7 @@ router.get("/:id", async (req, res) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: "Failed to fetch blogs from database" });
   }
 });
 
@@ -62,7 +62,7 @@ router.patch("/:id", async (req, res) => {
     res.json({ message: "Updated successfully" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: "Failed to fetch blogs from database" });
   }
 });
 
@@ -82,7 +82,7 @@ router.delete("/:id", async (req, res) => {
     res.json({ message: "Deleted successfully" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: "Failed to fetch blogs from database" });
   }
 });
 
