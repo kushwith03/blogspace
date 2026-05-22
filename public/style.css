@@ -42,3 +42,15 @@ h1, h2, h3 {
 ::-webkit-scrollbar-thumb:hover {
     background: #aaa;
 }
+
+@media (max-width: 576px) {
+    body {
+        padding: 1rem !important;
+    }
+    h1 {
+        font-size: 1.75rem;
+    }
+    .card-body {
+        padding: 1rem;
+    }
+}
