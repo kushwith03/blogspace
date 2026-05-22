@@ -46,11 +46,18 @@
             btn.innerText = 'Publishing...';
 
             const data = {
-                title: document.getElementById('title').value,
-                author: document.getElementById('author').value,
-                content: document.getElementById('content').value,
+                title: document.getElementById('title').value.trim(),
+                author: document.getElementById('author').value.trim(),
+                content: document.getElementById('content').value.trim(),
                 password: document.getElementById('password').value
             };
+
+            if (!data.title || !data.content) {
+                alert('Title and Content cannot be empty');
+                btn.disabled = false;
+                btn.innerText = 'Publish Blog';
+                return;
+            }
 
             try {
                 const res = await fetch(`${API_BASE_URL}/blogs`, {
