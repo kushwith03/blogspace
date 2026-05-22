@@ -3,13 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Blog</title>
+    <title>Edit Blog - BlogSpace</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="container py-4">
-    <div class="main-content">
-        <div id="edit-container" class="card shadow-sm mx-auto" style="max-width: 600px;">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="./">BlogSpace</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./">Home</a>
+                    </li>
+                    <li id="auth-links" class="d-flex align-items-center"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content container">
+        <div id="edit-container" class="card shadow-sm mx-auto" style="max-width: 700px;">
             <div class="card-body text-center py-5">
                 <div class="spinner-border text-primary" role="status"></div>
                 <p class="mt-2">Loading blog details...</p>
@@ -17,12 +34,31 @@
         </div>
     </div>
 
-    <footer class="mt-5 pt-3 border-top text-center text-muted">
-        <p>&copy; 2025 BlogSpace - Built by Kushwith</p>
+    <footer class="mt-auto py-4 border-top text-center text-muted">
+        <div class="container">
+            <p class="mb-0">&copy; <span id="year"></span> BlogSpace - Built by Kushwith</p>
+        </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module">
         import API_BASE_URL from './js/config.js';
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const token = localStorage.getItem('blog_token');
+        const authLinks = document.getElementById('auth-links');
+        if (token) {
+            authLinks.innerHTML = `<li class="nav-item ms-lg-3"><button id="logout-btn" class="btn btn-sm btn-outline-danger">Logout</button></li>`;
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                localStorage.removeItem('blog_token');
+                window.location.href = './';
+            });
+        } else {
+            authLinks.innerHTML = `
+                <li class="nav-item ms-lg-3"><a class="nav-link" href="./login">Login</a></li>
+                <li class="nav-item ms-lg-2"><a class="btn btn-sm btn-primary" href="./register">Register</a></li>
+            `;
+        }
 
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
@@ -39,24 +75,24 @@
                 if (blog.error) throw new Error(blog.error);
 
                 document.getElementById('edit-container').innerHTML = `
-                    <div class="card-body">
-                        <h2 class="card-title mb-4">Edit Blog</h2>
+                    <div class="card-body p-4 p-md-5">
+                        <h2 class="card-title mb-4">Edit Story</h2>
                         <form id="edit-form">
                             <div class="mb-3">
-                                <label class="form-label">Author</label>
+                                <label class="form-label text-muted small uppercase">Author</label>
                                 <input type="text" class="form-control" value="${blog.author}" disabled>
                             </div>
                             <div class="mb-3">
-                                <label for="content" class="form-label">New Content</label>
-                                <textarea class="form-control" id="content" rows="8" required>${blog.content}</textarea>
+                                <label for="content" class="form-label">Story Content</label>
+                                <textarea class="form-control" id="content" rows="12" required>${blog.content}</textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Enter secret password" required>
+                            <div class="mb-4">
+                                <label for="password" class="form-label">Confirm Post Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter password to save changes" required>
                             </div>
-                            <div class="d-grid gap-2">
-                                <button type="submit" id="submit-btn" class="btn btn-primary">Update Blog</button>
-                                <a href="./show?id=${blog.id}" class="btn btn-outline-secondary">Cancel</a>
+                            <div class="d-flex gap-2 pt-3 border-top">
+                                <button type="submit" id="submit-btn" class="btn btn-primary px-4">Save Changes</button>
+                                <a href="./show?id=${blog.id}" class="btn btn-outline-secondary px-4">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -66,7 +102,7 @@
                     e.preventDefault();
                     const btn = document.getElementById('submit-btn');
                     btn.disabled = true;
-                    btn.innerText = 'Updating...';
+                    btn.innerText = 'Saving...';
 
                     const data = {
                         content: document.getElementById('content').value,
@@ -74,7 +110,6 @@
                     };
 
                     try {
-                        const token = localStorage.getItem('blog_token');
                         const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
                             method: 'PATCH',
                             headers: { 
@@ -83,21 +118,20 @@
                             },
                             body: JSON.stringify(data)
                         });
-                        const result = await res.json();
                         if (res.status === 401) {
-                            alert('You must be logged in to edit a blog.');
+                            alert('You must be logged in to edit stories.');
                             window.location.href = './login';
                             return;
                         }
+                        const result = await res.json();
                         if (result.error) throw new Error(result.error);
                         window.location.href = `show?id=${id}`;
                     } catch (err) {
                         alert(err.message);
                         btn.disabled = false;
-                        btn.innerText = 'Update Blog';
+                        btn.innerText = 'Save Changes';
                     }
                 });
-
             } catch (err) {
                 console.error('Fetch Error:', err);
                 document.getElementById('edit-container').innerHTML = `<div class="alert alert-danger">Error: ${err.message}</div>`;

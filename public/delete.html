@@ -3,13 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Delete</title>
+    <title>Delete Blog - BlogSpace</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="container py-4">
-    <div class="main-content">
-        <div id="delete-container" class="card shadow-sm mx-auto border-danger" style="max-width: 500px;">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="./">BlogSpace</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./">Home</a>
+                    </li>
+                    <li id="auth-links" class="d-flex align-items-center"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content container d-flex align-items-center justify-content-center">
+        <div id="delete-container" class="card shadow-sm w-100 border-danger" style="max-width: 500px;">
             <div class="card-body text-center py-5">
                 <div class="spinner-border text-danger" role="status"></div>
                 <p class="mt-2">Loading...</p>
@@ -17,12 +34,31 @@
         </div>
     </div>
 
-    <footer class="mt-5 pt-3 border-top text-center text-muted">
-        <p>&copy; 2025 BlogSpace - Built by Kushwith</p>
+    <footer class="mt-auto py-4 border-top text-center text-muted">
+        <div class="container">
+            <p class="mb-0">&copy; <span id="year"></span> BlogSpace - Built by Kushwith</p>
+        </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module">
         import API_BASE_URL from './js/config.js';
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const token = localStorage.getItem('blog_token');
+        const authLinks = document.getElementById('auth-links');
+        if (token) {
+            authLinks.innerHTML = `<li class="nav-item ms-lg-3"><button id="logout-btn" class="btn btn-sm btn-outline-danger">Logout</button></li>`;
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                localStorage.removeItem('blog_token');
+                window.location.href = './';
+            });
+        } else {
+            authLinks.innerHTML = `
+                <li class="nav-item ms-lg-3"><a class="nav-link" href="./login">Login</a></li>
+                <li class="nav-item ms-lg-2"><a class="btn btn-sm btn-primary" href="./register">Register</a></li>
+            `;
+        }
 
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
@@ -39,17 +75,17 @@
                 if (blog.error) throw new Error(blog.error);
 
                 document.getElementById('delete-container').innerHTML = `
-                    <div class="card-body">
+                    <div class="card-body p-4 p-md-5">
                         <h2 class="card-title text-danger mb-4">Confirm Deletion</h2>
-                        <p>Are you sure you want to delete: <strong>"${blog.title}"</strong>?</p>
+                        <p class="mb-4">Are you sure you want to delete: <strong>"${blog.title}"</strong>?</p>
                         <form id="delete-form">
                             <div class="mb-4">
-                                <label for="password" class="form-label">Secret Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Enter password to confirm" required>
+                                <label for="password" class="form-label">Post Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Confirm password to delete" required>
                             </div>
                             <div class="d-grid gap-2">
-                                <button type="submit" id="submit-btn" class="btn btn-danger">Permanently Delete</button>
-                                <a href="./" class="btn btn-outline-secondary">Cancel</a>
+                                <button type="submit" id="submit-btn" class="btn btn-danger py-2">Permanently Delete</button>
+                                <a href="./show?id=${blog.id}" class="btn btn-outline-secondary py-2">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -61,12 +97,9 @@
                     btn.disabled = true;
                     btn.innerText = 'Deleting...';
 
-                    const data = {
-                        password: document.getElementById('password').value
-                    };
+                    const data = { password: document.getElementById('password').value };
 
                     try {
-                        const token = localStorage.getItem('blog_token');
                         const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
                             method: 'DELETE',
                             headers: { 
@@ -75,12 +108,12 @@
                             },
                             body: JSON.stringify(data)
                         });
-                        const result = await res.json();
                         if (res.status === 401) {
-                            alert('You must be logged in to delete a blog.');
+                            alert('You must be logged in to delete stories.');
                             window.location.href = './login';
                             return;
                         }
+                        const result = await res.json();
                         if (result.error) throw new Error(result.error);
                         window.location.href = './';
                     } catch (err) {
@@ -89,7 +122,6 @@
                         btn.innerText = 'Permanently Delete';
                     }
                 });
-
             } catch (err) {
                 console.error('Fetch Error:', err);
                 document.getElementById('delete-container').innerHTML = `<div class="alert alert-danger">Error: ${err.message}</div>`;
