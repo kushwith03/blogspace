@@ -25,9 +25,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files (fallback for easier local development)
-app.use(express.static(path.join(__dirname, "..", "public"), { extensions: ["html"] }));
-
 // Routes
 app.use("/api/blogs", blogRoutes);
 
