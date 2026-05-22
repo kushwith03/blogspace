@@ -8,12 +8,18 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body class="container py-4">
-    <div id="edit-container" class="card shadow-sm mx-auto" style="max-width: 600px;">
-        <div class="card-body text-center py-5">
-            <div class="spinner-border text-primary" role="status"></div>
-            <p class="mt-2">Loading blog details...</p>
+    <div class="main-content">
+        <div id="edit-container" class="card shadow-sm mx-auto" style="max-width: 600px;">
+            <div class="card-body text-center py-5">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2">Loading blog details...</p>
+            </div>
         </div>
     </div>
+
+    <footer class="mt-5 pt-3 border-top text-center text-muted">
+        <p>&copy; 2025 BlogSpace - Built by Kushwith</p>
+    </footer>
 
     <script type="module">
         import API_BASE_URL from '/js/config.js';

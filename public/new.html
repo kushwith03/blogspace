@@ -8,33 +8,39 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body class="container py-4">
-    <div class="card shadow-sm mx-auto" style="max-width: 600px;">
-        <div class="card-body">
-            <h2 class="card-title mb-4">Create New Blog</h2>
-            <form id="create-form">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" required>
-                </div>
-                <div class="mb-3">
-                    <label for="author" class="form-label">Author Name</label>
-                    <input type="text" class="form-control" id="author" required>
-                </div>
-                <div class="mb-3">
-                    <label for="content" class="form-label">Content</label>
-                    <textarea class="form-control" id="content" rows="6" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Secret Password (to edit/delete later)</label>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <div class="d-grid gap-2">
-                    <button type="submit" id="submit-btn" class="btn btn-success">Publish Blog</button>
-                    <a href="/index.html" class="btn btn-outline-secondary">Cancel</a>
-                </div>
-            </form>
+    <div class="main-content">
+        <div class="card shadow-sm mx-auto" style="max-width: 600px;">
+            <div class="card-body">
+                <h2 class="card-title mb-4">Create New Blog</h2>
+                <form id="create-form">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="author" class="form-label">Author Name</label>
+                        <input type="text" class="form-control" id="author" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea class="form-control" id="content" rows="6" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Secret Password (to edit/delete later)</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" id="submit-btn" class="btn btn-success">Publish Blog</button>
+                        <a href="/index.html" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+
+    <footer class="mt-5 pt-3 border-top text-center text-muted">
+        <p>&copy; 2025 BlogSpace - Built by Kushwith</p>
+    </footer>
 
     <script type="module">
         import API_BASE_URL from '/js/config.js';
