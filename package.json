@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
+    "serve": "npx serve public -p 5500",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,5 +19,8 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

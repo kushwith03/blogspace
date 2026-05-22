@@ -27,17 +27,18 @@ A clean, secure, and interview-ready full-stack blog application. Built with a d
 
 ### 1. Database
 - Install PostgreSQL and create a database named `blogspace`.
-- Run the queries in `schema.sql` to create the tables.
+- Run the schema to create the table: `psql -d blogspace -f schema.sql`
 
-### 2. Backend
-- Create a `.env` file in the root: `cp .env.example .env`
-- Update the variables in `.env` with your local database credentials.
+### 2. Backend (Terminal 1)
 - Install dependencies: `npm install`
-- Start the server: `node api/index.js`
+- Setup environment: `cp .env.example .env` (then update your DB credentials in `.env`)
+- Start development server: `npm run dev`
 
-### 3. Frontend
-- Open `public/index.html` using a local server (like Live Server in VS Code).
-- Ensure `public/js/config.js` is pointing to `http://localhost:3000/api`.
+### 3. Frontend (Terminal 2)
+- Start the frontend server: `npm run serve`
+- The app will be available at: `http://localhost:5500`
+
+---
 
 ## ☁️ Deployment
 
