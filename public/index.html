@@ -11,7 +11,7 @@
     <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>All Blogs</h1>
-            <a href="./new.html" class="btn btn-success">Create Blog</a>
+            <a href="./new" class="btn btn-success">Create Blog</a>
         </div>
 
         <div id="blogs-container" class="row row-cols-1 row-cols-md-2 g-4">
@@ -41,7 +41,7 @@
                         <div class="col-12 text-center py-5">
                             <h3 class="text-muted">No blogs found yet</h3>
                             <p class="mb-4">Be the first one to share your thoughts with the world!</p>
-                            <a href="new.html" class="btn btn-primary">Write Your First Blog</a>
+                            <a href="new" class="btn btn-primary">Write Your First Blog</a>
                         </div>
                     `;
                     return;
@@ -58,9 +58,9 @@
                                 <p class="text-muted small">~ ${blog.author}</p>
                             </div>
                             <div class="card-footer bg-transparent border-top-0 pb-3">
-                                <a href="./show.html?id=${blog.id}" class="btn btn-sm btn-outline-info">Read More</a>
-                                <a href="./edit.html?id=${blog.id}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                <a href="./delete.html?id=${blog.id}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                <a href="./show?id=${blog.id}" class="btn btn-sm btn-outline-info">Read More</a>
+                                <a href="./edit?id=${blog.id}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a href="./delete?id=${blog.id}" class="btn btn-sm btn-outline-danger">Delete</a>
                             </div>
                         </div>
                     </div>

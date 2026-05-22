@@ -29,7 +29,7 @@
 
         async function loadBlog() {
             if (!id) {
-                window.location.href = 'index.html';
+                window.location.href = './';
                 return;
             }
 
@@ -56,7 +56,7 @@
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" id="submit-btn" class="btn btn-primary">Update Blog</button>
-                                <a href="./show.html?id=${blog.id}" class="btn btn-outline-secondary">Cancel</a>
+                                <a href="./show?id=${blog.id}" class="btn btn-outline-secondary">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -81,7 +81,7 @@
                         });
                         const result = await res.json();
                         if (result.error) throw new Error(result.error);
-                        window.location.href = `show.html?id=${id}`;
+                        window.location.href = `show?id=${id}`;
                     } catch (err) {
                         alert(err.message);
                         btn.disabled = false;
