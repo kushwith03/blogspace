@@ -66,12 +66,21 @@
                     };
 
                     try {
+                        const token = localStorage.getItem('blog_token');
                         const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
                             method: 'DELETE',
-                            headers: { 'Content-Type': 'application/json' },
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
                             body: JSON.stringify(data)
                         });
                         const result = await res.json();
+                        if (res.status === 401) {
+                            alert('You must be logged in to delete a blog.');
+                            window.location.href = './login';
+                            return;
+                        }
                         if (result.error) throw new Error(result.error);
                         window.location.href = './';
                     } catch (err) {
