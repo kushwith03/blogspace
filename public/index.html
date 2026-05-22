@@ -15,7 +15,6 @@
         </div>
 
         <div id="blogs-container" class="row row-cols-1 row-cols-md-2 g-4">
-            <!-- Blogs will be injected here -->
             <div class="col-12 text-center py-5">
                 <div class="spinner-border text-primary" role="status"></div>
                 <p class="mt-2">Loading blogs...</p>
@@ -36,6 +35,18 @@
                 const blogs = await res.json();
                 
                 const container = document.getElementById('blogs-container');
+                
+                if (!blogs || blogs.length === 0) {
+                    container.innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <h3 class="text-muted">No blogs found yet</h3>
+                            <p class="mb-4">Be the first one to share your thoughts with the world!</p>
+                            <a href="new.html" class="btn btn-primary">Write Your First Blog</a>
+                        </div>
+                    `;
+                    return;
+                }
+
                 container.innerHTML = blogs.map(blog => `
                     <div class="col">
                         <div class="card h-100 shadow-sm">
@@ -54,16 +65,6 @@
                         </div>
                     </div>
                 `).join('');
-                
-                if (blogs.length === 0) {
-                    container.innerHTML = `
-                        <div class="col-12 text-center py-5">
-                            <h3 class="text-muted">No blogs found yet</h3>
-                            <p class="mb-4">Be the first one to share your thoughts with the world!</p>
-                            <a href="new.html" class="btn btn-primary">Write Your First Blog</a>
-                        </div>
-                    `;
-                }
             } catch (err) {
                 console.error('Fetch Error:', err);
                 document.getElementById('blogs-container').innerHTML = '<div class="alert alert-danger">Error loading blogs. Please check if the API is running.</div>';
