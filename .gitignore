@@ -11,3 +11,4 @@ logs/
 !.env.example
 .DS_Store
 .vscode/
+.idea/
