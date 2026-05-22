@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/blogs", blogRoutes);
 
-app.get("/health", (req, res) => {
+app.get("/api/health", (req, res) => {
   res.json({ 
     status: "ok", 
     message: "Server is running",
