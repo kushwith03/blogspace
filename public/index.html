@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogSpace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>All Blogs</h1>
+        <a href="/new.html" class="btn btn-success">Create Blog</a>
+    </div>
+
+    <div id="blogs-container" class="row row-cols-1 row-cols-md-2 g-4">
+        <!-- Blogs will be injected here -->
+        <div class="col-12 text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2">Loading blogs...</p>
+        </div>
+    </div>
+
+    <footer class="mt-5 pt-3 border-top text-center text-muted">
+        <p>&copy; 2025 BlogSpace - Built by Kushwith</p>
+    </footer>
+
+    <script type="module">
+        import API_BASE_URL from '/js/config.js';
+
+        async function loadBlogs() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/blogs`);
+                const blogs = await res.json();
+                
+                const container = document.getElementById('blogs-container');
+                container.innerHTML = blogs.map(blog => `
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">${blog.title}</h5>
+                                <p class="card-text text-truncate" style="max-height: 100px;">
+                                    ${blog.content}
+                                </p>
+                                <p class="text-muted small">~ ${blog.author}</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-top-0 pb-3">
+                                <a href="/show.html?id=${blog.id}" class="btn btn-sm btn-outline-info">Read More</a>
+                                <a href="/edit.html?id=${blog.id}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a href="/delete.html?id=${blog.id}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                if (blogs.length === 0) {
+                    container.innerHTML = '<div class="col-12 text-center py-5"><p>No blogs found. Be the first to write one!</p></div>';
+                }
+            } catch (err) {
+                document.getElementById('blogs-container').innerHTML = '<div class="alert alert-danger">Error loading blogs. Please check if the API is running.</div>';
+            }
+        }
+
+        loadBlogs();
+    </script>
+</body>
+</html>

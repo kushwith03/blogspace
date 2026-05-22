@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="container py-4">
+    <div class="card shadow-sm mx-auto" style="max-width: 600px;">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Create New Blog</h2>
+            <form id="create-form">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="author" class="form-label">Author Name</label>
+                    <input type="text" class="form-control" id="author" required>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea class="form-control" id="content" rows="6" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Secret Password (to edit/delete later)</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" id="submit-btn" class="btn btn-success">Publish Blog</button>
+                    <a href="/index.html" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import API_BASE_URL from '/js/config.js';
+
+        document.getElementById('create-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerText = 'Publishing...';
+
+            const data = {
+                title: document.getElementById('title').value,
+                author: document.getElementById('author').value,
+                content: document.getElementById('content').value,
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/blogs`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await res.json();
+                if (result.error) throw new Error(result.error);
+                
+                window.location.href = '/index.html';
+            } catch (err) {
+                alert(err.message);
+                btn.disabled = false;
+                btn.innerText = 'Publish Blog';
+            }
+        });
+    </script>
+</body>
+</html>

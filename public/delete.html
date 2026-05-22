@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="container py-4">
+    <div id="delete-container" class="card shadow-sm mx-auto border-danger" style="max-width: 500px;">
+        <div class="card-body text-center py-5">
+            <div class="spinner-border text-danger" role="status"></div>
+            <p class="mt-2">Loading...</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import API_BASE_URL from '/js/config.js';
+
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        async function loadDelete() {
+            if (!id) {
+                window.location.href = '/index.html';
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/blogs/${id}`);
+                const blog = await res.json();
+                if (blog.error) throw new Error(blog.error);
+
+                document.getElementById('delete-container').innerHTML = `
+                    <div class="card-body">
+                        <h2 class="card-title text-danger mb-4">Confirm Deletion</h2>
+                        <p>Are you sure you want to delete: <strong>"${blog.title}"</strong>?</p>
+                        <form id="delete-form">
+                            <div class="mb-4">
+                                <label for="password" class="form-label">Secret Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter password to confirm" required>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" id="submit-btn" class="btn btn-danger">Permanently Delete</button>
+                                <a href="/index.html" class="btn btn-outline-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                `;
+
+                document.getElementById('delete-form').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btn = document.getElementById('submit-btn');
+                    btn.disabled = true;
+                    btn.innerText = 'Deleting...';
+
+                    const data = {
+                        password: document.getElementById('password').value
+                    };
+
+                    try {
+                        const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
+                            method: 'DELETE',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+                        const result = await res.json();
+                        if (result.error) throw new Error(result.error);
+                        window.location.href = '/index.html';
+                    } catch (err) {
+                        alert(err.message);
+                        btn.disabled = false;
+                        btn.innerText = 'Permanently Delete';
+                    }
+                });
+
+            } catch (err) {
+                document.getElementById('delete-container').innerHTML = `<div class="alert alert-danger">Error: ${err.message}</div>`;
+            }
+        }
+
+        loadDelete();
+    </script>
+</body>
+</html>
