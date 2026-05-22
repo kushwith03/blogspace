@@ -22,14 +22,14 @@
     </footer>
 
     <script type="module">
-        import API_BASE_URL from '/js/config.js';
+        import API_BASE_URL from './js/config.js';
 
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
 
         async function loadDelete() {
             if (!id) {
-                window.location.href = '/index.html';
+                window.location.href = 'index.html';
                 return;
             }
 
@@ -73,7 +73,7 @@
                         });
                         const result = await res.json();
                         if (result.error) throw new Error(result.error);
-                        window.location.href = '/index.html';
+                        window.location.href = 'index.html';
                     } catch (err) {
                         alert(err.message);
                         btn.disabled = false;
@@ -82,6 +82,7 @@
                 });
 
             } catch (err) {
+                console.error('Fetch Error:', err);
                 document.getElementById('delete-container').innerHTML = `<div class="alert alert-danger">Error: ${err.message}</div>`;
             }
         }
