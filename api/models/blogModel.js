@@ -13,7 +13,7 @@ const Blog = {
 
   async create(blogData) {
     const { title, content, author, hashedPassword } = blogData;
-    const q = "INSERT INTO blogs (id, title, content, author, password, date) VALUES (gen_random_uuid(), $1, $2, $3, $4, NOW()) RETURNING id";
+    const q = "INSERT INTO blogs (title, content, author, password) VALUES ($1, $2, $3, $4) RETURNING id";
     const result = await pool.query(q, [title, content, author, hashedPassword]);
     return result.rows[0];
   },
