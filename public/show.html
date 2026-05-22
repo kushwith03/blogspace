@@ -18,11 +18,14 @@
     </div>
 
     <footer class="mt-5 pt-3 border-top text-center text-muted">
-        <p>&copy; 2025 BlogSpace - Built by Kushwith</p>
+        <p>&copy; <span id="year"></span> BlogSpace - Built by Kushwith</p>
     </footer>
 
     <script type="module">
         import API_BASE_URL from './js/config.js';
+
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
