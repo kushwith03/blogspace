@@ -1,11 +1,11 @@
-# 🚀 BlogSpace — Production-Ready Full-Stack Platform
+# 🚀 BlogSpace — Full-Stack Publishing Platform
 
 [![Frontend](https://img.shields.io/badge/Frontend-Vercel-black?style=for-the-badge&logo=vercel)](https://blogspace-phi-two.vercel.app)
 [![Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render)](https://blogspace-api-dy5p.onrender.com/api/health)
 [![Database](https://img.shields.io/badge/Database-Neon--PostgreSQL-00e599?style=for-the-badge&logo=postgresql)](https://neon.tech)
 [![Security](https://img.shields.io/badge/Auth-JWT--Bcrypt-blue?style=for-the-badge&logo=jsonwebtokens)](https://jwt.io)
 
-**BlogSpace** is a high-performance, decoupled full-stack blogging platform engineered with modern industry standards. It features a clean **MVC architecture**, stateless **JWT authentication**, and a professional **SaaS-inspired UI**.
+**BlogSpace** is a decoupled full-stack blogging platform. It features a clean **MVC architecture**, stateless **JWT authentication**, and a professional **SaaS-inspired UI**.
 
 🔗 **Live Demo:** [blogspace-phi-two.vercel.app](https://blogspace-phi-two.vercel.app)  
 📡 **API Status:** [blogspace-api-dy5p.onrender.com/api/health](https://blogspace-api-dy5p.onrender.com/api/health)
@@ -15,9 +15,9 @@
 ## 🌟 Key Technical Features
 
 - **🏛️ MVC Architecture:** Clean separation of concerns (Models, Controllers, Routes) for maximum maintainability.
-- **🔐 Advanced Authentication:** Stateless **JWT (JSON Web Token)** implementation with **Bcryptjs** password hashing.
+- **🔐 Stateless Authentication:** JWT (JSON Web Token) implementation with **Bcryptjs** password hashing.
 - **🛡️ Secure Data Access:** Dual-layer security (User account auth + individual post-level passwords).
-- **📊 Robust Persistence:** Fully relational **PostgreSQL** database with optimized connection pooling.
+- **📊 Relational Persistence:** Fully relational **PostgreSQL** database with connection pooling.
 - **🎨 Modern UI/UX:** Responsive SaaS-dashboard aesthetic built with **Bootstrap 5** and custom CSS.
 - **☁️ Cloud-Native:** Optimized for distributed deployment across Vercel, Render, and Neon.
 
@@ -102,7 +102,7 @@ npm run serve
 - **CORS Management:** Handled complex cross-origin resource sharing between Vercel and Render.
 - **Route Rewrites:** Implemented professional routing in a static environment using `vercel.json`.
 - **Stateless Auth:** Engineered a robust JWT middleware to secure sensitive data operations.
-- **Database Scalability:** Mastered PostgreSQL connection pooling for serverless environments.
+- **Database Connectivity:** Implemented PostgreSQL connection pooling for serverless environments.
 
 ---
 
