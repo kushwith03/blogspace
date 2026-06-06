@@ -1,111 +1,53 @@
-# 🚀 BlogSpace — Full-Stack Publishing Platform
+# BlogSpace — Full-Stack Blog Platform
 
-[![Frontend](https://img.shields.io/badge/Frontend-Vercel-black?style=for-the-badge&logo=vercel)](https://blogspace-phi-two.vercel.app)
-[![Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render)](https://blogspace-api-dy5p.onrender.com/api/health)
-[![Database](https://img.shields.io/badge/Database-Neon--PostgreSQL-00e599?style=for-the-badge&logo=postgresql)](https://neon.tech)
-[![Security](https://img.shields.io/badge/Auth-JWT--Bcrypt-blue?style=for-the-badge&logo=jsonwebtokens)](https://jwt.io)
+A professional, decoupled blogging platform featuring a clean **MVC architecture**, secure **JWT authentication**, and a responsive SaaS-inspired interface.
 
-**BlogSpace** is a decoupled full-stack blogging platform. It features a clean **MVC architecture**, stateless **JWT authentication**, and a professional **SaaS-inspired UI**.
+## Overview
 
-🔗 **Live Demo:** [blogspace-phi-two.vercel.app](https://blogspace-phi-two.vercel.app)  
-📡 **API Status:** [blogspace-api-dy5p.onrender.com/api/health](https://blogspace-api-dy5p.onrender.com/api/health)
+BlogSpace is built to demonstrate robust backend engineering and relational data modeling. It features a complete RESTful API and a secure user management system, optimized for high performance and data integrity.
 
----
+- **Frontend:** [blogspace-phi-two.vercel.app](https://blogspace-phi-two.vercel.app)
+- **Backend API:** [blogspace-api-dy5p.onrender.com/api/health](https://blogspace-api-dy5p.onrender.com/api/health)
 
-## 🌟 Key Technical Features
+## Tech Stack
 
-- **🏛️ MVC Architecture:** Clean separation of concerns (Models, Controllers, Routes) for maximum maintainability.
-- **🔐 Stateless Authentication:** JWT (JSON Web Token) implementation with **Bcryptjs** password hashing.
-- **🛡️ Secure Data Access:** Dual-layer security (User account auth + individual post-level passwords).
-- **📊 Relational Persistence:** Fully relational **PostgreSQL** database with connection pooling.
-- **🎨 Modern UI/UX:** Responsive SaaS-dashboard aesthetic built with **Bootstrap 5** and custom CSS.
-- **☁️ Cloud-Native:** Optimized for distributed deployment across Vercel, Render, and Neon.
+- **Backend:** Node.js, Express.js (RESTful MVC)
+- **Database:** PostgreSQL (Neon Serverless)
+- **Security:** JWT (Stateless Auth), Bcryptjs (Hashing)
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript, Bootstrap 5
+- **Deployment:** Vercel & Render
 
----
+## Key Engineering Features
 
-## 🏗️ Technical Architecture
+- **MVC Architecture:** Structured separation of concerns across models, controllers, and routes for scalability.
+- **Stateless Authentication:** Secure JWT-based auth flow with authorization middleware for protected CRUD operations.
+- **Relational Persistence:** Advanced PostgreSQL modeling with connection pooling for efficient data handling.
+- **Responsive UI:** Modern dashboard aesthetic optimized for both mobile and desktop views.
 
-The backend is structured using the **Model-View-Controller (MVC)** design pattern to ensure a decoupled and scalable codebase:
+## Setup & Installation
 
-```text
-api/
-├── config/      # Database pooling and connection logic
-├── controllers/ # Business logic and request processing
-├── middleware/  # JWT verification and auth filters
-├── models/      # Data access layer (Raw SQL / pg)
-└── routes/      # RESTful endpoint definitions
-```
+1. **Clone and Install:**
+   ```bash
+   git clone https://github.com/kushwith03/blogspace.git
+   cd blogspace
+   npm install
+   ```
 
----
+2. **Environment Configuration:**
+   Create a `.env` file in the root:
+   ```env
+   DATABASE_URL=your_postgresql_connection_string
+   JWT_SECRET=your_secure_secret_key
+   ```
 
-## 🚀 Tech Stack
+3. **Run Application:**
+   ```bash
+   npm run dev    # Start API server (Port 3000)
+   npm run serve  # Start Frontend (Port 5500)
+   ```
 
-| Layer | Technology |
-| :--- | :--- |
-| **Frontend** | HTML5, CSS3 (Variables), Vanilla JS (ES6+), Bootstrap 5 |
-| **Backend** | Node.js, Express.js |
-| **Database** | PostgreSQL (Neon Serverless) |
-| **Authentication** | JWT, LocalStorage, Bcryptjs |
-| **Deployment** | Vercel (Frontend), Render (API) |
+## Author
 
----
-
-## ⚙️ Local Development
-
-### 1. Prerequisites
-- Node.js (v18+)
-- PostgreSQL instance
-
-### 2. Installation
-```bash
-git clone https://github.com/kushwith03/blogspace.git
-cd blogspace
-npm install
-```
-
-### 3. Environment Setup
-Create a `.env` file based on `.env.example`:
-```env
-DATABASE_URL=your_postgres_connection_string
-JWT_SECRET=your_secure_random_key
-FRONTEND_URL=http://localhost:5500
-```
-
-### 4. Running the App
-```bash
-# Start API (Port 3000)
-npm run dev
-
-# Start Frontend (Port 5500)
-npm run serve
-```
-
----
-
-## 🧪 API Endpoints (RESTful)
-
-### Auth
-- `POST /api/auth/register` - Create a new account
-- `POST /api/auth/login` - Authenticate and receive JWT
-
-### Blogs
-- `GET /api/blogs` - Fetch all blogs (Public)
-- `GET /api/blogs/:id` - Fetch single blog (Public)
-- `POST /api/blogs` - Create blog (Protected 🔐)
-- `PATCH /api/blogs/:id` - Update blog (Protected 🔐)
-- `DELETE /api/blogs/:id` - Delete blog (Protected 🔐)
-
----
-
-## 🎓 Lessons Learned & Challenges
-
-- **CORS Management:** Handled complex cross-origin resource sharing between Vercel and Render.
-- **Route Rewrites:** Implemented professional routing in a static environment using `vercel.json`.
-- **Stateless Auth:** Engineered a robust JWT middleware to secure sensitive data operations.
-- **Database Connectivity:** Implemented PostgreSQL connection pooling for serverless environments.
-
----
-
-<p align="center">
-  Built with ❤️ by <strong>Kushwith_03</strong>
-</p>
+**R Khushwith Kumar**  
+Full Stack Software Engineer  
+[Portfolio](https://rkhushwith-portfolio.vercel.app) • [GitHub](https://github.com/kushwith03) • [LinkedIn](https://linkedin.com/in/kushwith03)
